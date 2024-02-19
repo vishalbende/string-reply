@@ -1,5 +1,7 @@
 # string-reply
-
+```
+Python version : 3.9.18
+```
 
 ### Install requirements
 ```
