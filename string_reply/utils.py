@@ -19,24 +19,30 @@ def calculte_input(input_data):
     # check inputs and collect functions 
     all_functions = []
     str_input = input_data[1]
+    
+    is_valid_rule = True
     for data in rules_data:
         rule_ = f"rule_{data}"
         rule_funct = getattr(rule_obj, rule_, None)
 
         if not rule_funct:
-            return JSONResponse(content={"message": "Invalid input"}, status_code=400)
-        
+            is_valid_rule = False
+            break
+            
         all_functions.append(rule_funct)
+        
+        
+    if not is_valid_rule:
+        return 400, {
+                "message": "Invalid input"
+                }
     
     # run collected functions
     for function in all_functions:
         return_string = function(str_input)
         str_input = copy.deepcopy(return_string)
         
-    return JSONResponse(   
-        content={
-            "data": str_input
-        }, 
-        status_code=200
-    )
+    return 200, {
+                    "data": str_input
+                }
     

@@ -23,9 +23,9 @@ def rule_based_function(input_string: str = Path(...)):
                 "message": "Invalid pattern"
             }, status_code=400)
         
-        return_data = calculte_input(input_data)    
-        return return_data
+        status_code, content = calculte_input(input_data)  
         
+        return JSONResponse(content=content, status_code=status_code)
     except Exception as e: 
         print(e)
         return JSONResponse(content={"message": "Something went wrong"})
