@@ -32,3 +32,13 @@ def test_string_reply_v2_rule_23():
     assert response.json() == {
         "message": "Invalid input"
     }
+
+def test_string_reply_v2_rule_1111():
+    """
+    - test to run same rule for multiple times and not limited to 2 digits
+    """
+    response = client.get("/v2/reply/1111-kbzw9ru")
+    assert response.status_code == 200
+    assert response.json() == {
+        "data": "kbzw9ru"
+    }

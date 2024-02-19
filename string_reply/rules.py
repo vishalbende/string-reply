@@ -2,6 +2,9 @@ import hashlib
 
 
 class Rules:
+    """
+     - class to configure rules with pattern as `rule_{rule_number}`
+    """
     
     def __init__(self) -> None:
         pass
