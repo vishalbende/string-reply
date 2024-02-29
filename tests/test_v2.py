@@ -1,10 +1,26 @@
 from fastapi.testclient import TestClient
 
 from api.main import _get_app
+from string_reply.rules import Rules
 
 client = TestClient(_get_app())
 
+# single rule test
+def test_rule_1():
+    rule_obj = Rules()
+    input_string = 'kbzw9ru'
+    return_str = rule_obj.rule_1(input_string)
+    assert return_str == 'ur9wzbk'
 
+
+def test_rule_2():
+    rule_obj = Rules()
+    input_string = 'kbzw9ru'
+    return_str = rule_obj.rule_2(input_string)
+    assert return_str == '0fafeaae780954464c1b29f765861fad'
+    
+
+# Api tests
 def test_string_reply_v2_rule_11():
     response = client.get("/v2/reply/11-kbzw9ru")
     assert response.status_code == 200
@@ -42,3 +58,7 @@ def test_string_reply_v2_rule_1111():
     assert response.json() == {
         "data": "kbzw9ru"
     }
+    
+    
+
+    

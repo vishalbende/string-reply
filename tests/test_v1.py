@@ -10,4 +10,3 @@ def test_string_reply_v1():
     assert response.json() == {
         "data": "kbzw9ru"
     }
-
