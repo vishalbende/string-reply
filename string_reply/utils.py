@@ -9,39 +9,30 @@ def calculte_input(input_data):
      - this logic is not limited to two digit rule only. Can process any number of rules.
     """
     
-    # convert rules to array         
-    rules_data = list(input_data[0])
-    
-    # initialise rule class 
+    # initialize rule class 
     rule_obj = Rules()
 
-    # check inputs and collect functions 
+    # collect functions 
     all_functions = []
     str_input = input_data[1]
+    rules_data = input_data[0]
     
-    is_valid_rule = True
     for data in rules_data:
         rule_ = f"rule_{data}"
         rule_funct = getattr(rule_obj, rule_, None)
 
         if not rule_funct:
-            is_valid_rule = False
-            break
-            
+            return 400, {
+                "message": "Invalid input"
+            }
+
         all_functions.append(rule_funct)
         
-        
-    if not is_valid_rule:
-        return 400, {
-                "message": "Invalid input"
-                }
-    
     # run collected functions
     for function in all_functions:
-        return_string = function(str_input)
-        str_input = copy.deepcopy(return_string)
+        str_input = function(str_input)
         
     return 200, {
-                    "data": str_input
-                }
+        "data": str_input
+    }
     
